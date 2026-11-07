@@ -1,0 +1,6 @@
+# Site construit (régénéré à chaque publication)
+_site/
+.cache-images/
+__pycache__/
+Thumbs.db
+.DS_Store

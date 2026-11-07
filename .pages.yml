@@ -1,0 +1,227 @@
+# Configuration de Pages CMS (https://app.pagescms.org) : formulaires pour ajouter
+# et modifier les œuvres, séries, thèmes et le contenu de la page À propos.
+# Chaque enregistrement crée un commit sur GitHub, qui reconstruit le site tout seul.
+
+media:
+  input: originaux
+  output: /originaux
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: oeuvres
+    label: Œuvres
+    type: collection
+    path: contenu/oeuvres
+    format: json
+    filename:
+      template: "{year}{month}{day}-{hour}{minute}{second}.json"
+      field: false
+    view:
+      fields: [titre, serie, themes]
+      primary: titre
+    fields:
+      - name: image
+        label: Photo de l'œuvre
+        type: image
+        required: true
+        description: Une photo nette en JPG ou PNG, idéalement d'au moins 2000 pixels de large. Les vignettes sont créées automatiquement.
+      - name: titre
+        label: Titre
+        type: string
+        description: Laisser vide si l'œuvre n'a pas de titre.
+      - name: serie
+        label: Série
+        type: reference
+        description: La page de série où l'œuvre apparaît.
+        options:
+          collection: series
+          value: "{fields.slug}"
+          label: "{fields.nom}"
+      - name: themes
+        label: Thèmes
+        type: reference
+        description: Un ou plusieurs thèmes (facultatif). Chaque thème a sa propre page dans le portfolio.
+        options:
+          collection: themes
+          multiple: true
+          value: "{fields.slug}"
+          label: "{fields.nom}"
+      - name: ordre
+        label: Position dans la série
+        type: number
+        description: 1 = en premier. Laisser vide pour placer l'œuvre à la fin de la série.
+      - name: technique
+        label: Technique
+        type: string
+        description: "Facultatif. Ex. : Acrylique et faux vitrail sur bois"
+      - name: dimensions
+        label: Dimensions
+        type: string
+        description: "Facultatif. Ex. : 40 × 50 cm"
+      - name: annee
+        label: Année
+        type: string
+        description: Facultatif.
+      - name: couverture
+        label: Image de couverture de la série
+        type: boolean
+        description: Cocher pour utiliser cette œuvre comme image de la série sur l'accueil.
+      - name: vitrail
+        label: Place dans le vitrail de l'accueil
+        type: number
+        description: "1 à 8 (1 = l'arche du haut, 4 = la case large du milieu). Laisser vide si l'œuvre n'y figure pas."
+
+  - name: series
+    label: Séries
+    type: collection
+    path: contenu/series
+    format: json
+    filename:
+      template: "{fields.slug}.json"
+      field: false
+    view:
+      fields: [nom, ordre]
+      primary: nom
+    fields:
+      - name: nom
+        label: Nom de la série
+        type: string
+        required: true
+      - name: slug
+        label: Adresse de la page
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: "Lettres minuscules, chiffres et tirets seulement (ex. : paysages-d-hiver)"
+        description: Devient l'adresse rebeccamasse.com/<adresse>. Ne plus la changer une fois publiée.
+      - name: ordre
+        label: Position dans le portfolio
+        type: number
+      - name: visible
+        label: Afficher la série sur le site
+        type: boolean
+        default: true
+        description: Décocher pour retirer la série et ses œuvres du site sans rien effacer.
+      - name: phrase_compte
+        label: Texte sous le titre
+        type: string
+        description: "{n} est remplacé par le nombre d'œuvres. Laisser vide pour « {n} œuvres »."
+      - name: ancienne_adresse
+        label: Ancienne adresse Wix
+        type: string
+        hidden: true
+
+  - name: themes
+    label: Thèmes
+    type: collection
+    path: contenu/themes
+    format: json
+    filename:
+      template: "{fields.slug}.json"
+      field: false
+    view:
+      fields: [nom, ordre]
+      primary: nom
+    fields:
+      - name: nom
+        label: Nom du thème
+        type: string
+        required: true
+      - name: slug
+        label: Adresse de la page
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: "Lettres minuscules, chiffres et tirets seulement (ex. : agneau-de-dieu)"
+        description: La page du thème sera rebeccamasse.com/theme-<adresse>.
+      - name: ordre
+        label: Position dans la liste des thèmes
+        type: number
+
+  - name: apropos
+    label: Page À propos
+    type: file
+    path: contenu/apropos.json
+    format: json
+    fields:
+      - name: bio
+        label: Biographie
+        type: text
+        list: true
+        description: Un paragraphe par élément.
+      - name: expositions
+        label: Dernières expositions
+        type: object
+        list: true
+        description: La plus récente en premier. Les six premières apparaissent aussi sur l'accueil.
+        fields:
+          - name: lieu
+            label: Lieu ou événement
+            type: string
+            required: true
+          - name: titre
+            label: Titre de l'exposition
+            type: string
+          - name: note
+            label: Note
+            type: string
+            description: "Ex. : Exposition permanente"
+      - name: memoire
+        label: Mémoire de maîtrise
+        type: object
+        fields:
+          - name: titre
+            label: Titre
+            type: string
+          - name: diplome
+            label: Diplôme
+            type: string
+          - name: etablissement
+            label: Établissement
+            type: string
+          - name: annee
+            label: Année
+            type: string
+          - name: pages
+            label: Nombre de pages
+            type: number
+          - name: resume
+            label: Extrait du résumé
+            type: text
+            list: true
+          - name: fichier
+            label: Fichier PDF
+            type: string
+            readonly: true
+          - name: page_titre
+            label: Image de la page de titre
+            type: string
+            readonly: true
+
+  - name: site
+    label: Réglages du site
+    type: file
+    path: contenu/site.json
+    format: json
+    fields:
+      - name: facebook
+        label: Page Facebook
+        type: string
+      - name: cle_web3forms
+        label: Clé Web3Forms du formulaire de contact
+        type: string
+        description: Se trouve dans le compte web3forms.com.
+      - name: photo_apropos
+        label: Photo de la page À propos
+        type: string
+        hidden: true
+      - name: photo_apropos_alt
+        label: Description de la photo de la page À propos
+        type: string
+        description: Lue à voix haute pour les personnes aveugles et affichée si l'image ne charge pas.
+      - name: image_partage
+        type: string
+        hidden: true

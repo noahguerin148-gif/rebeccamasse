@@ -1,0 +1,975 @@
+/* ==========================================================================
+   Rébecca Massé, artiste peintre
+   Feuille de style unique. Aucune dépendance externe.
+   ========================================================================== */
+
+/* ---------- Polices (hébergées avec le site) ---------- */
+@font-face {
+  font-family: "Cardo";
+  src: url("../polices/cardo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cardo";
+  src: url("../polices/cardo-400-italique.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cardo";
+  src: url("../polices/cardo-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("../polices/hanken-grotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Couleurs et mesures ---------- */
+:root {
+  --mur: #F0F1F1;          /* mur de galerie, gris pierre très pâle */
+  --mur-ombre: #E2E5E8;    /* fond des images en chargement */
+  --trait: #C7CCD3;        /* filets de séparation */
+  --plomb: #1E2330;        /* le plomb du vitrail, aussi la couleur du texte */
+  --pierre: #5A606E;       /* texte secondaire */
+  --bleu: #27449A;         /* bleu vitrail, couleur d'action */
+  --bleu-fonce: #1B3176;
+  --or: #C08A26;           /* verre doré, usage ponctuel */
+  --blanc: #FFFFFF;
+  --clair-sur-plomb: #DDE1E8;
+
+  --serif: "Cardo", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Hanken Grotesk", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --large: 1180px;
+  --gouttiere: clamp(1rem, 4vw, 2.5rem);
+  --section: clamp(4rem, 9vw, 7.5rem);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--mur);
+  color: var(--plomb);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3 {
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0 0 1.1em; }
+
+a {
+  color: var(--bleu);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+a:hover { color: var(--bleu-fonce); text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 3px solid var(--bleu);
+  outline-offset: 3px;
+}
+
+::selection { background: var(--bleu); color: var(--blanc); }
+
+.conteneur {
+  max-width: var(--large);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.saut {
+  position: absolute;
+  left: 1rem; top: -4rem;
+  z-index: 100;
+  background: var(--plomb);
+  color: var(--blanc);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+}
+.saut:focus { top: 1rem; color: var(--blanc); }
+
+/* ---------- Boutons et liens d'action ---------- */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--bleu);
+  color: var(--blanc);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bouton:hover { background: var(--bleu-fonce); color: var(--blanc); }
+.bouton[disabled] { opacity: 0.6; cursor: progress; }
+
+.lien-action {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ---------- En-tête ---------- */
+.entete {
+  position: relative;
+  z-index: 10;
+}
+.entete .conteneur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.25rem;
+}
+
+.signature {
+  color: var(--plomb);
+  text-decoration: none;
+  line-height: 1.1;
+}
+.signature:hover { color: var(--plomb); }
+.signature span {
+  display: block;
+  font-size: 1.45rem;
+}
+.signature small {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--pierre);
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav a {
+  display: block;
+  padding-block: 0.35rem;
+  border-bottom: 2px solid transparent;
+  color: var(--plomb);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.nav a:hover { border-bottom-color: var(--trait); }
+.nav a[aria-current="page"] { border-bottom-color: var(--bleu); }
+
+.menu-bouton { display: none; }
+
+@media (max-width: 760px) {
+  .js .menu-bouton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--trait);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--plomb);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .menu-bouton .barres,
+  .menu-bouton .barres::before,
+  .menu-bouton .barres::after {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    background: currentColor;
+    content: "";
+  }
+  .menu-bouton .barres { position: relative; }
+  .menu-bouton .barres::before { position: absolute; top: -5px; }
+  .menu-bouton .barres::after  { position: absolute; top: 5px; }
+  .menu-bouton[aria-expanded="true"] .barres { background: transparent; }
+  .menu-bouton[aria-expanded="true"] .barres::before { top: 0; transform: rotate(45deg); }
+  .menu-bouton[aria-expanded="true"] .barres::after  { top: 0; transform: rotate(-45deg); }
+
+  .js .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--mur);
+    border-bottom: 6px solid var(--plomb);
+    box-shadow: 0 24px 40px -24px rgba(30, 35, 48, 0.35);
+  }
+  .js .nav.ouvert { display: block; }
+  .nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.5rem var(--gouttiere) 1.25rem;
+  }
+  .nav a {
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--trait);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+  .nav a[aria-current="page"] {
+    border-bottom-color: var(--trait);
+    color: var(--bleu);
+  }
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  margin-top: var(--section);
+  background: var(--plomb);
+  color: var(--clair-sur-plomb);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+.pied .conteneur {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem 3rem;
+  padding-block: 3.5rem 2.5rem;
+}
+.pied-signature {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: var(--blanc);
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+}
+.pied-metier { margin: 0; }
+.pied ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-self: start;
+}
+.pied a { color: var(--blanc); text-decoration: none; }
+.pied a:hover { text-decoration: underline; color: var(--blanc); }
+.pied :focus-visible { outline-color: var(--blanc); }
+.pied-droits {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(221, 225, 232, 0.2);
+  font-size: 0.85rem;
+  color: #AEB4C0;
+}
+
+@media (max-width: 640px) {
+  .pied .conteneur { grid-template-columns: 1fr; }
+}
+
+/* ---------- Titres de section ---------- */
+.section { padding-top: var(--section); }
+
+.section-tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+.section-tete h2 { font-size: clamp(2rem, 4vw, 3rem); }
+
+/* ==========================================================================
+   Accueil : le vitrail
+   ========================================================================== */
+.accueil-hero .conteneur {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  padding-top: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.hero-texte h1 {
+  font-size: clamp(3.4rem, 9vw, 7.5rem);
+  line-height: 0.93;
+  letter-spacing: -0.02em;
+}
+.hero-texte h1 span { display: block; }
+.hero-metier {
+  margin: 1rem 0 0;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-style: italic;
+  color: var(--pierre);
+}
+.hero-chapeau {
+  max-width: 34ch;
+  margin: clamp(1.75rem, 3.5vw, 2.5rem) 0 clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(1.2rem, 1.6vw, 1.35rem);
+  line-height: 1.6;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+}
+
+/* Le vitrail : une fenêtre en arc, les œuvres serties dans le plomb */
+.vitrail {
+  --plomb-cadre: clamp(9px, 1.4vw, 13px);
+  --plomb-fin: clamp(5px, 0.7vw, 7px);
+  justify-self: end;
+  width: min(100%, 440px, 44.5vh);
+  min-width: 260px;
+  aspect-ratio: 4 / 7;
+  padding: var(--plomb-cadre);
+  background: var(--plomb);
+  border-radius: 50% 50% 4px 4px / 28.6% 28.6% 4px 4px;
+}
+.vitrail-verre {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.45fr 1fr 1fr 1fr 1fr;
+  gap: var(--plomb-fin);
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50% 50% 2px 2px / 27.9% 27.9% 2px 2px;
+  background: var(--plomb);
+}
+.vitrail-verre a {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #2C3447;
+}
+.vitrail-verre .large { grid-column: 1 / -1; }
+.vitrail-verre img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vitrail-verre a:hover img { filter: brightness(1.08) saturate(1.08); }
+.vitrail-verre a:focus-visible { outline-offset: -4px; outline-color: var(--blanc); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .vitrail-verre a {
+    animation: allumer 1.2s ease-out both;
+    animation-delay: calc(var(--i, 0) * 150ms + 250ms);
+  }
+  @keyframes allumer {
+    from { opacity: 0.1; filter: saturate(0.15) brightness(0.6); }
+    to   { opacity: 1;   filter: none; }
+  }
+}
+
+@media (max-width: 860px) {
+  .accueil-hero .conteneur { grid-template-columns: 1fr; }
+  .vitrail {
+    justify-self: center;
+    width: min(100%, 380px);
+    min-width: 0;
+  }
+}
+
+/* Séries (accueil) */
+.series-grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 3.5vw, 3rem) clamp(1rem, 2.5vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.serie-lien {
+  display: block;
+  color: var(--plomb);
+  text-decoration: none;
+}
+.serie-lien:hover { color: var(--plomb); }
+.serie-lien img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--mur-ombre);
+}
+.serie-lien h3 {
+  margin-top: 1rem;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+}
+.serie-lien:hover h3 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.serie-compte {
+  margin: 0.3rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--pierre);
+}
+
+@media (max-width: 760px) {
+  .series-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Démarche (accueil) */
+.demarche-citation {
+  max-width: 46rem;
+  margin: 0;
+  padding-left: clamp(1.25rem, 3vw, 2.25rem);
+  border-left: 6px solid var(--plomb);
+}
+.demarche-citation p {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.6vw, 2.05rem);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.lien-suite {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin: 1.75rem 0 0;
+  padding-left: calc(6px + clamp(1.25rem, 3vw, 2.25rem));
+}
+
+/* ==========================================================================
+   Expositions (accueil et À propos)
+   ========================================================================== */
+.expositions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 4rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--trait);
+}
+.expositions li {
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--trait);
+}
+.expo-lieu { display: block; font-size: 1.2rem; line-height: 1.35; }
+.expo-titre {
+  display: block;
+  margin-top: 0.15rem;
+  font-style: italic;
+  color: var(--pierre);
+}
+.expo-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--pierre);
+}
+.expo-note::before {
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--or);
+  content: "";
+}
+
+@media (max-width: 640px) {
+  .expositions { grid-template-columns: 1fr; }
+}
+
+/* Appel au contact (accueil) */
+.appel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1.5rem 3rem;
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 6px solid var(--plomb);
+}
+.appel h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); }
+.appel p { margin: 0.75rem 0 0; max-width: 40ch; color: var(--pierre); }
+
+@media (max-width: 640px) {
+  .appel { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Pages intérieures
+   ========================================================================== */
+.page-tete { padding-top: clamp(2.5rem, 6vw, 5rem); }
+.page-tete h1 { font-size: clamp(2.75rem, 7vw, 5.5rem); }
+.page-tete .chapeau {
+  margin: 1rem 0 0;
+  max-width: 40ch;
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  color: var(--pierre);
+}
+
+.fil {
+  margin-bottom: 1rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+.fil a { font-weight: 600; }
+
+/* À propos */
+.apropos {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5.5rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+.apropos-photo {
+  position: sticky;
+  top: 2rem;
+  margin: 0;
+}
+.apropos-photo img {
+  width: 100%;
+  background: var(--mur-ombre);
+}
+.apropos-texte h2 {
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-style: italic;
+  color: var(--pierre);
+}
+.apropos-texte p { max-width: 62ch; }
+
+@media (max-width: 820px) {
+  .apropos { grid-template-columns: 1fr; }
+  .apropos-photo { position: static; max-width: 560px; }
+}
+
+/* Mémoire de maîtrise (À propos) */
+.memoire {
+  display: grid;
+  grid-template-columns: minmax(150px, 15rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  padding-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  border-top: 6px solid var(--plomb);
+}
+.memoire-couverture {
+  display: block;
+  border: 1px solid var(--trait);
+  background: var(--blanc);
+}
+.memoire-couverture img { width: 100%; }
+.memoire-titre {
+  max-width: 30ch;
+  margin: 0;
+  font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+  font-style: italic;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.memoire-meta {
+  margin: 1rem 0 1.75rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--pierre);
+}
+.memoire-resume p { max-width: 62ch; }
+.memoire-action {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 1.75rem 0 0;
+}
+.memoire-action span {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--pierre);
+}
+
+@media (max-width: 680px) {
+  .memoire { grid-template-columns: 1fr; }
+  .memoire-couverture { width: min(55%, 200px); }
+}
+
+/* Portfolio : une rangée par série */
+.rangees {
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 6px solid var(--plomb);
+}
+.rangee {
+  display: grid;
+  grid-template-columns: minmax(200px, 18rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem clamp(1.5rem, 4vw, 3.5rem);
+  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+  border-bottom: 1px solid var(--trait);
+}
+.rangee h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); }
+.rangee h2 a { color: var(--plomb); text-decoration: none; }
+.rangee h2 a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.rangee .serie-compte { margin-bottom: 1rem; }
+
+.bande {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  padding-bottom: 0.5rem;
+}
+.bande a {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.bande img {
+  width: auto;
+  height: clamp(130px, 17vw, 200px);
+  max-width: none;
+  background: var(--mur-ombre);
+}
+
+@media (max-width: 760px) {
+  .rangee { grid-template-columns: 1fr; }
+}
+
+/* Thèmes : pastilles serties d'un trait de plomb */
+.themes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-top: 1.5rem;
+}
+.themes-titre {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--pierre);
+}
+.themes ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pastille {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid var(--plomb);
+  background: var(--blanc);
+  color: var(--plomb);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.pastille span { font-size: 0.8rem; color: var(--pierre); }
+.pastille:hover { background: var(--bleu); border-color: var(--bleu); color: var(--blanc); text-decoration: none; }
+.pastille:hover span,
+.pastille[aria-current="page"] span { color: var(--clair-sur-plomb); }
+.pastille[aria-current="page"] { background: var(--plomb); color: var(--blanc); }
+
+/* Galerie d'une série : accrochage en colonnes, œuvres entières */
+.galerie {
+  columns: 3 280px;
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+.oeuvre-carte {
+  break-inside: avoid;
+  margin: 0 0 clamp(1rem, 2.5vw, 2rem);
+}
+.oeuvre {
+  display: block;
+  cursor: zoom-in;
+}
+.oeuvre img {
+  width: 100%;
+  background: var(--mur-ombre);
+}
+.oeuvre:hover img { filter: brightness(1.04); }
+.oeuvre-carte figcaption {
+  margin-top: 0.6rem;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--pierre);
+}
+.oeuvre-details {
+  display: block;
+  margin-top: 0.1rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-style: normal;
+}
+
+@media (max-width: 600px) {
+  .galerie { columns: 2; }
+  .oeuvre-carte figcaption { font-size: 0.95rem; }
+}
+
+.series-voisines {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 1.5rem;
+  border-top: 6px solid var(--plomb);
+}
+.series-voisines a {
+  display: block;
+  color: var(--plomb);
+  text-decoration: none;
+}
+.series-voisines small {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--pierre);
+}
+.series-voisines span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.2;
+}
+.series-voisines a:hover span { text-decoration: underline; text-decoration-thickness: 1px; }
+.series-voisines .suivante { text-align: right; }
+
+/* Contact */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+}
+.contact h1 { font-size: clamp(2.6rem, 6.5vw, 5rem); }
+.contact-signature {
+  margin: 1.25rem 0 2rem;
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--pierre);
+}
+.contact-autre {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--trait);
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--pierre);
+}
+
+.formulaire { display: grid; gap: 1.25rem; }
+.champ { display: grid; gap: 0.4rem; }
+.champ label {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.champ label span { font-weight: 400; color: var(--pierre); }
+.champ input,
+.champ textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #A9AFB9;
+  border-radius: 3px;
+  background: var(--blanc);
+  color: var(--plomb);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.champ textarea { min-height: 11rem; resize: vertical; }
+.champ input:focus-visible,
+.champ textarea:focus-visible { outline-offset: 0; border-color: var(--bleu); }
+.formulaire .bouton { justify-self: start; }
+.pot-de-miel { display: none !important; }
+
+.formulaire-etat {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+}
+.formulaire-etat:empty { display: none; }
+.formulaire-etat[data-type="ok"] {
+  padding: 0.9rem 1rem;
+  border-left: 6px solid var(--bleu);
+  background: var(--blanc);
+}
+.formulaire-etat[data-type="erreur"] {
+  padding: 0.9rem 1rem;
+  border-left: 6px solid #A3341F;
+  background: var(--blanc);
+  color: #7A2414;
+}
+
+@media (max-width: 820px) {
+  .contact { grid-template-columns: 1fr; }
+}
+
+/* Page introuvable */
+.introuvable { padding-top: clamp(3rem, 8vw, 6rem); max-width: 40rem; }
+.introuvable h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1.25rem; }
+
+/* ==========================================================================
+   Visionneuse (agrandissement des œuvres)
+   ========================================================================== */
+.visionneuse {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(22, 26, 36, 0.97);
+  color: var(--clair-sur-plomb);
+  font-family: var(--sans);
+  overscroll-behavior: contain;
+}
+.visionneuse::backdrop { background: rgba(22, 26, 36, 0.9); }
+body:has(.visionneuse[open]) { overflow: hidden; }
+
+.visionneuse-scene {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  margin: 0;
+  padding: 4rem clamp(1rem, 7vw, 6rem) 1rem;
+}
+.visionneuse-cadre {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+}
+.visionneuse-cadre img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.visionneuse figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 1rem;
+  padding-top: 0.9rem;
+  text-align: center;
+}
+.visionneuse-titre {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--blanc);
+}
+.visionneuse-details,
+.visionneuse-compte { font-size: 0.9rem; color: #AEB4C0; }
+
+.visionneuse button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(221, 225, 232, 0.25);
+  border-radius: 50%;
+  background: rgba(30, 35, 48, 0.7);
+  color: var(--blanc);
+  cursor: pointer;
+}
+.visionneuse button:hover { background: var(--bleu); border-color: var(--bleu); }
+.visionneuse button:focus-visible { outline-color: var(--blanc); }
+.visionneuse button svg { width: 1.25rem; height: 1.25rem; }
+.visionneuse-fermer { top: 0.9rem; right: 0.9rem; }
+.visionneuse-prec { left: clamp(0.5rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); }
+.visionneuse-suiv { right: clamp(0.5rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); }
+.visionneuse.seule .visionneuse-prec,
+.visionneuse.seule .visionneuse-suiv { display: none; }
+
+@media (max-width: 640px) {
+  .visionneuse-scene { padding: 3.75rem 0.75rem 5.25rem; }
+  .visionneuse-prec,
+  .visionneuse-suiv { top: auto; bottom: 1rem; transform: none; }
+  .visionneuse-prec { left: 1rem; }
+  .visionneuse-suiv { right: 1rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .visionneuse-cadre img { transition: opacity 0.25s ease; }
+  .visionneuse-cadre img.chargement { opacity: 0.25; }
+}
+
+/* ---------- Impression ---------- */
+@media print {
+  .entete .nav, .menu-bouton, .pied ul, .visionneuse { display: none !important; }
+  .pied { background: none; color: #000; }
+}

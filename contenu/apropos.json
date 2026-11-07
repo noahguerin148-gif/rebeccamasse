@@ -1,0 +1,77 @@
+{
+  "bio": [
+    "Titulaire d'un DEC en arts plastiques, d'un baccalauréat et d'une maîtrise en histoire de l'art, je développe une pratique où se rencontrent réflexion théorique, exploration matérielle et recherche spirituelle.",
+    "Artiste peintre inspirée par la force symbolique des récits bibliques, je crée des œuvres où couleur, texture et lumière deviennent des langages expressifs. Mon médium de prédilection est l'acrylique, qui me permet une spontanéité et une liberté créative essentielles à ma démarche. Je travaille autant sur toile que sur bois, deux surfaces complémentaires qui m'offrent des possibilités différentes d'explorer la matière, la profondeur et la transparence.",
+    "Le faux vitrail occupe également une place importante dans mon travail : il me permet de jouer avec la translucidité et l'intensité chromatique, donnant à mes compositions une dimension lumineuse et vibrante. J'intègre fréquemment des fragments de pages bibliques, des versets et de petits objets, créant un dialogue symbolique entre texte, matière et couleur. Influencée par la poésie visuelle de Marc Chagall, je puise mon inspiration dans des récits tels que Jonas, l'Arbre de la vie, le Buisson ardent ou l'Agneau de Dieu."
+  ],
+  "expositions": [
+    {
+      "lieu": "Café Krieghoff",
+      "titre": "",
+      "note": ""
+    },
+    {
+      "lieu": "BASILICOs",
+      "titre": "",
+      "note": "Exposition permanente"
+    },
+    {
+      "lieu": "Café Europa",
+      "titre": "",
+      "note": ""
+    },
+    {
+      "lieu": "Bibliothèque Marie-Victorin",
+      "titre": "Poésie Biblique",
+      "note": ""
+    },
+    {
+      "lieu": "Maison de la Culture de L'Ancienne-Lorette",
+      "titre": "Couleurs et textures",
+      "note": ""
+    },
+    {
+      "lieu": "Galerie Bécot",
+      "titre": "La Bible : Source de poésie",
+      "note": ""
+    },
+    {
+      "lieu": "Manif d'Art 8",
+      "titre": "",
+      "note": ""
+    },
+    {
+      "lieu": "Vivart",
+      "titre": "L'Art de la Joie",
+      "note": ""
+    },
+    {
+      "lieu": "Symposium Zoozoothèque",
+      "titre": "",
+      "note": ""
+    },
+    {
+      "lieu": "Centre d'Affaires L'Exécutif",
+      "titre": "",
+      "note": ""
+    },
+    {
+      "lieu": "Old Customs House, Britannia Beach",
+      "titre": "",
+      "note": ""
+    }
+  ],
+  "memoire": {
+    "titre": "L'Illustration de la Bible par Marc Chagall comme témoignage de sa position théologique personnelle",
+    "diplome": "Maîtrise en histoire de l'art (M.A.)",
+    "etablissement": "Université Laval",
+    "annee": "2010",
+    "pages": 383,
+    "resume": [
+      "Notre mémoire se concentre sur l'illustration de la Bible réalisée par Marc Chagall et commandée par Ambroise Vollard en 1931. Soixante-six eaux-fortes ont été tirées dans les ateliers de Maurice Potin avec sa collaboration, de 1931 à 1939. Trente-neuf autres ont été reprises et terminées dans ces mêmes ateliers avec la collaboration de Raymond Hassen, de 1952 à 1956.",
+      "Le cadre de cette recherche se limite à l'étude iconographique et iconologique de ces cent-cinq illustrations. Le propos est régi par un plan thématique basé sur la chronologie même des histoires telles qu'elles sont coordonnées dans les Saintes Écritures. Trois chapitres examinent ainsi ce projet. Le premier porte sur le thème des fondateurs de la communauté juive. Le second correspond à l'histoire des Juifs nouvellement entrés en terre promise. Le troisième aborde les illustrations relatant la vie et les visions des prophètes."
+    ],
+    "fichier": "/documents/memoire-rebecca-masse-2010.pdf",
+    "page_titre": "/images/site/memoire-page-titre.jpg"
+  }
+}
