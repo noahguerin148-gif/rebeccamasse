@@ -716,7 +716,8 @@ def redirection(cible, nom):
 def ecrire(rel, texte):
     chemin = SORTIE / rel
     chemin.parent.mkdir(parents=True, exist_ok=True)
-    chemin.write_text(texte, encoding="utf-8", newline="\n")
+    with open(chemin, "w", encoding="utf-8", newline="\n") as f:
+        f.write(texte)
 
 
 def main():

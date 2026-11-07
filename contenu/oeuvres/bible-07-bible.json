@@ -2,6 +2,8 @@
   "titre": "",
   "image": "/originaux/bible/07-bible.jpg",
   "serie": "la-bible-source-de-poesie",
-  "themes": [],
-  "ordre": 7
+  "themes": [
+    "abraham"
+  ],
+  "ordre": 19
 }

@@ -3,23 +3,47 @@
 #  Clic droit > « Exécuter avec PowerShell », ou :
 #      powershell -ExecutionPolicy Bypass -File .\apercu.ps1
 # ============================================================================
-$ErrorActionPreference = 'Stop'
+# Pas de 'Stop' ici : dans Windows PowerShell 5, les messages d'erreur d'un
+# programme externe (Python) arrêteraient le script. On vérifie $LASTEXITCODE.
+$ErrorActionPreference = 'Continue'
 Set-Location $PSScriptRoot
 
-$python = (Get-Command python -ErrorAction SilentlyContinue)
-if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue) }
+function Terminer($code) {
+    Read-Host "Appuyez sur Entrée pour fermer"
+    exit $code
+}
+
+# Trouver un vrai Python (et pas le raccourci du Microsoft Store)
+$python = $null
+foreach ($nom in 'python', 'py') {
+    $commande = Get-Command $nom -ErrorAction SilentlyContinue
+    if ($commande) {
+        & $commande.Source -c "import sys" 2>$null
+        if ($LASTEXITCODE -eq 0) { $python = $commande.Source; break }
+    }
+}
 if (-not $python) {
     Write-Host "Python est introuvable. Installez-le avec :  winget install Python.Python.3.12" -ForegroundColor Yellow
-    Read-Host "Appuyez sur Entrée pour fermer"; exit 1
+    Write-Host "puis fermez et rouvrez PowerShell."
+    Terminer 1
 }
 
-& $python.Source -c "import PIL" 2>$null
+# Installer Pillow au besoin (une seule fois)
+& $python -c "import PIL" 2>$null
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Installation de Pillow (une seule fois)..."
-    & $python.Source -m pip install --quiet -r outils\requirements.txt
+    & $python -m pip install --quiet --disable-pip-version-check -r outils\requirements.txt
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "L'installation de Pillow a échoué. Essayez :  $python -m pip install Pillow" -ForegroundColor Yellow
+        Terminer 1
+    }
 }
 
-& $python.Source outils\construire.py
-if ($LASTEXITCODE -ne 0) { Read-Host "Appuyez sur Entrée pour fermer"; exit 1 }
+# Construire le site
+& $python outils\construire.py
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "La construction a échoué (voir le message ci-dessus)." -ForegroundColor Yellow
+    Terminer 1
+}
 
 Start-Process (Join-Path $PSScriptRoot "_site\index.html")

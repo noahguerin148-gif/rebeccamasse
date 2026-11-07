@@ -1,6 +1,6 @@
 # Site de Rébecca Massé, artiste peintre
 
-Nouvelle version de www.rebeccamasse.com : 117 œuvres en 7 séries, classées aussi par thèmes bibliques, avec la biographie, les expositions et le mémoire de maîtrise. Le site ne dépend plus de Wix. Toutes les photos sont dans le projet.
+Nouvelle version de www.rebeccamasse.com : 128 œuvres en 7 séries, classées aussi par thèmes bibliques, avec la biographie, les expositions et le mémoire de maîtrise. Le site ne dépend plus de Wix. Toutes les photos sont dans le projet.
 
 Le contenu (œuvres, séries, thèmes, page À propos) est rangé dans de petits fichiers de données, et un script construit le site à partir de ces fichiers. Une fois sur GitHub, le site se reconstruit et se republie tout seul à chaque modification. L'hébergement sur GitHub Pages est gratuit.
 
@@ -20,7 +20,7 @@ Sans le script : `pip install Pillow`, puis `python outils\construire.py`, puis 
 |---|---|
 | `contenu/oeuvres/` | Un fichier par œuvre : titre, photo, série, thèmes, position, technique, dimensions, année |
 | `contenu/series/` | Les séries : nom, adresse de la page, ordre, affichée ou masquée |
-| `contenu/themes/` | Les thèmes : Moïse, L'Arbre de la vie, Jonas, La Pêche miraculeuse, Noé, L'Agneau de Dieu |
+| `contenu/themes/` | Les thèmes : Moïse, L'Arbre de la vie, Jonas, La Pêche miraculeuse, Noé, L'Agneau de Dieu, Abraham |
 | `contenu/apropos.json` | Biographie, expositions et mémoire de maîtrise |
 | `contenu/site.json` | Réglages : lien Facebook, clé du formulaire de contact |
 | `originaux/` | Les photos des œuvres (2000 pixels maximum ; les vignettes sont générées) |
@@ -143,7 +143,10 @@ L'export Wix contenait 150 fichiers. On y trouvait les 79 œuvres de l'ancien si
 | Jonas | Jonas |
 | La Pêche miraculeuse | Pêche miraculeuse 2, et le tableau sans titre aux voiliers et au banc de poissons |
 | Noé | Et Dieu se souvint de Noé |
-| L'Agneau de Dieu | Le mouton fait de pages de Bible (sans titre) |
+| L'Agneau de Dieu | Le mouton fait de pages de Bible (sans titre), l'agneau de profil sur fond rouge |
+| Abraham | La promesse et les bergers sous les étoiles |
+
+**Mise à jour du 7 novembre 2026** (demandes de Rébecca) : le Coq a été retiré, et 12 nouvelles œuvres ont été ajoutées en tête de la série biblique, sans titre pour l'instant.
 
 - **Rangement** : les tableaux figuratifs ajoutés sont dans « Mes débuts… » (l'ancienne adresse de cette série était `/figuratif`). Les deux versions de « La promesse », l'horizontale et la verticale, sont dans la série biblique.
 - **Objets peints** : à garder, renommer ou masquer selon ce qu'elle préfère.
